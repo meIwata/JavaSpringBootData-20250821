@@ -50,5 +50,12 @@ public class TeacherController {
     public Teacher updateTeacher(@RequestBody int id, @RequestBody Teacher teacher) {
         return teacherService.updateTeacher(id, teacher);
     }
+
+    // 查詢教師年齡
+    @Operation(summary = "查詢教師年齡", description = "根據年齡查詢教師")
+    @GetMapping("/age/{age}") // 完整路徑會是 "/api/teachers/age/{age}"
+    public List<Teacher> getTeacherByAge(@PathVariable Integer age) {
+        return teacherService.findByAge(age);
+    }
     
 }

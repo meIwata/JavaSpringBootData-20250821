@@ -66,4 +66,9 @@ public class TeacherService {
 
         return null; // 如果更新失敗，返回null
     }
+
+    // 根據年齡查詢教師
+    public List<Teacher> findByAge(Integer age) {
+        return teacherRepository.findTeacherByAge(age);
+    }
 }
