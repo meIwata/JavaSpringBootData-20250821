@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity // 加入@Entity註解，表示這是一個資料庫的表格
-@Table(name = "students") // 指定資料庫中的表格名稱
+@Table(name = "Student") // 指定資料庫中的表格名稱
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
