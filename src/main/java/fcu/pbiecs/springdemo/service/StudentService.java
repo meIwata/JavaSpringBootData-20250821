@@ -164,4 +164,14 @@ public class StudentService {
          */
         return null; // 如果更新失敗，返回null
     }
+
+    // 根據電子郵件查詢學生資料
+    public Student findByEmail(String email) {
+        return studentRepository.findByEmail(email);
+    }
+
+    // 根據姓氏查詢學生資料
+    public List<Student> findByLastName(String lastName) {
+        return studentRepository.findByLastName(lastName);
+    }
 }

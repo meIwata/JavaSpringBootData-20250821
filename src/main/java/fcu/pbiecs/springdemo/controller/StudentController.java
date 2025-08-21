@@ -50,6 +50,18 @@ public class StudentController {
     public Student updateStudent(@PathVariable int id, @RequestBody Student updatedStudent) {
         return studentService.updateStudent(id, updatedStudent);
     }
+
+
+    @GetMapping("/email/{email}")
+    public Student getStudentByEmail(@PathVariable String email) {
+        return studentService.findByEmail(email);
+    }
+
+    @GetMapping("/lastname/{lastName}")
+    public List<Student> getStudentsByLastName(@PathVariable String lastName) {
+        return studentService.findByLastName(lastName);
+    }
+
     /*
     private List<Student> students = new ArrayList<>();
 

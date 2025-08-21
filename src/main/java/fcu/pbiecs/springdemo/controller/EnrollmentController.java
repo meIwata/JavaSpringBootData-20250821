@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name="選課碗裡", description="提供選課 CRUD API") // Swagger標籤，用於API文檔生成
+@Tag(name="選課管理", description="提供選課 CRUD API") // Swagger標籤，用於API文檔生成
 @CrossOrigin("*") // 允許所有來源的跨域請求
 @RestController // 處理HTTP請求的控制器
 @RequestMapping("/api/enrollments") // 定義路徑前綴
