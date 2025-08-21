@@ -43,14 +43,14 @@ public class CourseController {
     // 新增課程資料
     @Operation(summary = "新增課程", description = "新增一個新的課程")
     @PostMapping
-    public String createCourse(@RequestBody Course course) {
+    public Course createCourse(@RequestBody Course course) {
         return courseService.createCourse(course);
     }
 
     // 更新課程資料
     @Operation(summary = "更新課程", description = "根據ID更新特定課程")
     @PutMapping("/{id}")
-    public String updateCourse(@PathVariable int id, @RequestBody Course updatedCourse) {
+    public Course updateCourse(@PathVariable int id, @RequestBody Course updatedCourse) {
         return courseService.updateCourse(id, updatedCourse);
     }
 }
