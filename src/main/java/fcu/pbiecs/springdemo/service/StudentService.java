@@ -1,6 +1,7 @@
 package fcu.pbiecs.springdemo.service;
 
 import fcu.pbiecs.springdemo.model.Student;
+import fcu.pbiecs.springdemo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,16 +11,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 // 處理學生相關的業務邏輯
 public class StudentService {
-    @Autowired // 自動注入DatabaseService，這樣就可以使用資料庫服務
-    private DatabaseService dbService;
+//    @Autowired // 自動注入DatabaseService，這樣就可以使用資料庫服務
+//    private DatabaseService dbService;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     // 查詢所有學生資料
     public List<Student> getAllStudents() {
-        List<Student> students = new ArrayList<>();
+        return studentRepository.findAll();
+        /*
+//        List<Student> students = new ArrayList<>();
 
         String sql = "SELECT * FROM Student";
         try (Connection conn = dbService.connect();
@@ -47,10 +54,17 @@ public class StudentService {
             exception.printStackTrace();
         }
         return students;
+         */
     }
 
     // 查詢特定指定id學生資料
     public Student getStudentById(int studentId) {
+       Optional<Student> optionalStudent = studentRepository.findById(studentId);
+
+       if(optionalStudent.isPresent()){
+              return optionalStudent.get();
+       }
+       /*
         String sql = "SELECT * FROM Student WHERE student_id = ?";
         try (Connection conn = dbService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -67,11 +81,18 @@ public class StudentService {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+        */
         return null; // 如果沒有找到學生，返回null
     }
 
     // 刪除特定學生資料
     public String deleteStudentById(int studentId) {
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+        if(optionalStudent.isPresent()){
+            studentRepository.deleteById(studentId);
+            return "成功刪除 id=" + studentId + " 的資料";
+        }
+        /*
         String sql = "DELETE FROM Student WHERE student_id = ?";
         try (Connection conn = dbService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -83,11 +104,14 @@ public class StudentService {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+         */
         return "刪除失敗或找不到 id=" + studentId + " 的資料";
     }
 
     // 新增學生資料
     public Student createStudent(Student student) {
+        return studentRepository.save(student);
+        /*
         String sql = "INSERT INTO Student (first_name, last_name, email, date_of_birth) VALUES (?, ?, ?, ?)";
         try (Connection conn = dbService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -108,10 +132,20 @@ public class StudentService {
             exception.printStackTrace();
         }
         return null; // 如果新增失敗，返回null
+         */
     }
 
     // 更新學生資料
     public Student updateStudent(int id, Student student) {
+        Student existingStudent = getStudentById(id);
+        if(existingStudent != null){
+            existingStudent.setFirstName(student.getFirstName());
+            existingStudent.setLastName(student.getLastName());
+            existingStudent.setEmail(student.getEmail());
+            existingStudent.setBirthday(student.getBirthday());
+            return studentRepository.save(existingStudent);
+        }
+        /*
         String sql = "UPDATE Student SET first_name = ?, last_name = ?, email = ?, date_of_birth = ? WHERE student_id = ?";
         try (Connection conn = dbService.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -127,6 +161,7 @@ public class StudentService {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+         */
         return null; // 如果更新失敗，返回null
     }
 }
