@@ -26,7 +26,7 @@ public class Course {
     private int credits;
 
     @ManyToOne
-    @Column(name="teacher_id", nullable = false) // 把外鍵定義出來
+    @JoinColumn(name="teacher_id", nullable = false) // 把外鍵定義出來
 //    private int teacherId;
     private Teacher teacher;
 }
