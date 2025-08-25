@@ -14,6 +14,4 @@ import java.io.Serializable;
 public class EnrollmentId implements Serializable {
     private int student;
     private int course;
-
-
 }
