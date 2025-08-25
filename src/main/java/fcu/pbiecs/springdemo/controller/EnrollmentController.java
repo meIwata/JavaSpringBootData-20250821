@@ -23,24 +23,24 @@ public class EnrollmentController {
         return enrollmentService.getAllEnrollments();
     }
 
-    // 查詢某學生的所有選課
-    @Operation(summary = "查詢某學生的所有選課", description = "根據學生ID取得該學生的選課資訊")
-    @GetMapping("/{studentId}")
-    public List<Enrollment> getEnrollmentsByStudentId(@PathVariable int studentId) {
-        return enrollmentService.getEnrollmentsByStudentId(studentId);
-    }
-
-    // 新增選課
-    @Operation(summary = "新增選課", description = "根據學生ID和課程ID新增選課資訊")
-    @PostMapping("/{studentId}/{courseId}")
-    public String addEnrollment(@PathVariable int studentId, @PathVariable int courseId) {
-        return enrollmentService.addEnrollment(studentId, courseId);
-    }
-
-    // 刪除選課
-    @Operation(summary = "刪除選課", description = "根據學生ID和課程ID刪除選課資訊")
-    @DeleteMapping("/{studentId}/{courseId}")
-    public String deleteEnrollment(@PathVariable int studentId, @PathVariable int courseId) {
-        return enrollmentService.deleteEnrollment(studentId, courseId);
-    }
+//    // 查詢某學生的所有選課
+//    @Operation(summary = "查詢某學生的所有選課", description = "根據學生ID取得該學生的選課資訊")
+//    @GetMapping("/{studentId}")
+//    public List<Enrollment> getEnrollmentsByStudentId(@PathVariable int studentId) {
+//        return enrollmentService.getEnrollmentsByStudentId(studentId);
+//    }
+//
+//    // 新增選課
+//    @Operation(summary = "新增選課", description = "根據學生ID和課程ID新增選課資訊")
+//    @PostMapping("/{studentId}/{courseId}")
+//    public String addEnrollment(@PathVariable int studentId, @PathVariable int courseId) {
+//        return enrollmentService.addEnrollment(studentId, courseId);
+//    }
+//
+//    // 刪除選課
+//    @Operation(summary = "刪除選課", description = "根據學生ID和課程ID刪除選課資訊")
+//    @DeleteMapping("/{studentId}/{courseId}")
+//    public String deleteEnrollment(@PathVariable int studentId, @PathVariable int courseId) {
+//        return enrollmentService.deleteEnrollment(studentId, courseId);
+//    }
 }
